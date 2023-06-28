@@ -104,6 +104,13 @@ import React, {useState} from 'react';
 // }
 
 function TopCard({ pokemons }) {
+  const row = [];
+
+  pokemons.array.forEach(pokemon => {
+    row.push(
+      
+    )
+  });
 
   return (
     <div>
