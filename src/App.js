@@ -124,28 +124,33 @@ function TopCard({ pokemon }) {
 // colortypes.filter( it[0] === types[0]).map( it => it[1])
 function PokemonType({ pokemon, colortypes }) {
   const types = pokemon.type;
+  let colors = [];
 
-  // We use an if statement for two different use cases: If the monster has one or two types
+  // This function matches the first type of the monster to the colortypes list to return the right rgb value 
+  let getColor = (types, colortypes, i) => {
+    return colortypes.filter(it => it.type === types[i]).map(it => it.color);
+  }
+  
+  // We store the result in an empty list
+  colors = getColor(types, colortypes, 0)
 
+  // Here we change the background if there's only one type
   if (types.length === 1) {
-    let getColor = (types, colortypes) => {
-      
-      return colortypes.filter(it => it.type === types[0]).map(it => it.color);
-    }
-    
-    let colors = getColor(types, colortypes)
-    console.log(colors)
-
     return (
       <div className='pokemon-type-container'>
-        <div className='pokemon-type'>{types[0]}</div>
+        <div className='pokemon-type' style={{ backgroundColor: colors[0]}}>{types[0].toUpperCase()}</div>
       </div>
     )
   } else if (types.length === 2) {
+    
+    // Otherwise we reuse the function to push the other type to the 'colors' list
+    colors.push(getColor(types, colortypes, 1))
+    console.log(colors);
+
     return ( 
       <div className='pokemon-type-container'>
-        <div className='pokemon-type'>{types[0]}</div> 
-        <div className='pokemon-type'>{types[1]}</div> 
+        <div className='pokemon-type' style={{ backgroundColor: colors[0]}}>{types[0].toUpperCase()}</div> 
+        <div className='pokemon-type' style={{ backgroundColor: colors[1]}}>{types[1].toUpperCase()}</div> 
       </div>
     )
   } else {
