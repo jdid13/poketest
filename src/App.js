@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./App.css";
 import font from './font.css';
 import backcard from './assets/backcard.png';
@@ -123,7 +123,7 @@ function TopCard({ pokemon }) {
 
 // This component displays the monster's type
 // colortypes.filter( it[0] === types[0]).map( it => it[1])
-function PokemonType({ pokemon, colortypes }) {
+function PokemonType({ pokemon, colortypes, setBgColor }) {
   const types = pokemon.type;
   let colors = [];
 
@@ -134,6 +134,7 @@ function PokemonType({ pokemon, colortypes }) {
   
   // We store the result in an empty list
   colors = getColor(types, colortypes, 0)
+  setBgColor = colors[0];
 
   // Here we change the background if there's only one type
   if (types.length === 1) {
@@ -191,14 +192,15 @@ function PokemonStats({ pokemon }) {
 
 // This function creates a single card using all the components necessary to assemble them
 
-function PokemonCard({ pokemon, colortypes }) {
+function PokemonCard({ pokemon, colortypes, setBgColor }) {
+
   return (
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <div className='pokemon-card'>
             <TopCard pokemon={pokemon} />
-            <PokemonType pokemon={pokemon} colortypes={colortypes}/>
+            <PokemonType pokemon={pokemon} colortypes={colortypes} setBgColor={setBgColor} />
             <div className='space-between'>
               <Picture pokemon={pokemon}/>
               <PokemonStats pokemon={pokemon} />
@@ -216,11 +218,14 @@ function PokemonCard({ pokemon, colortypes }) {
 // This function generate cards using the PokemonCard function using the POKEMONS list
 
 function PokemonsGenerator({ pokemons, colortypes }) {
-
+  const [bgColor, setBgColor] = useState();
+  
   // We use an empty list to map each element of the original through the PokemonCard function
   const pokemonsList = pokemons.map((pokemon) => (
-    <PokemonCard key={pokemon.id} pokemon={pokemon} colortypes={colortypes}/>
+    <PokemonCard key={pokemon.id} pokemon={pokemon} colortypes={colortypes} setBgColor={setBgColor}/>
   ));
+
+  
 
   return <div className='pokemon-generator'>{pokemonsList}</div>;
 }
