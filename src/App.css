@@ -45,13 +45,35 @@
   justify-content: center;
 }
 
+.backcard {
+  max-width: 300px;
+  max-height: 474px;
+}
+
 .pokemon-card {
   flex-flow: column nowrap;
   justify-items: center;
   width: 300px;
+  height: 414.44px;
   margin: 10px;
   border: solid 1px black;
-  border-radius: 1rem;
+  border-radius: 5% / 3.5%;;
+  box-shadow: -5px -5px 5px -5px rgb(0, 0, 0, 0.5), 
+  5px 5px 5px -5px rgb(0, 0, 0, 0.5), 
+  -7px -7px 10px -5px transparent, 
+  7px 7px 10px -5px transparent, 
+  0 0 5px 0px rgba(255,255,255,0),
+  0 25px 35px -20px rgba(0, 0, 0, 0.5);
+}
+
+.pokemon-card:hover {
+  box-shadow: 
+    -20px -20px 30px -25px rgb(0, 0, 0, 0.5), 
+    20px 20px 30px -25px rgb(0, 0, 0, 0.5), 
+    -7px -7px 10px -5px rgb(0, 0, 0, 0.5), 
+    7px 7px 10px -5px rgb(0, 0, 0, 0.5), 
+    0 0 13px 4px rgba(255,255,255,0.3),
+    0 25px 35px -20px rgba(0, 0, 0, 0.5);
 }
 
 .top-card {
@@ -104,8 +126,17 @@
 }
 
 .picture {
-  max-width: 284px;
-  max-height: 284px;
+  /* max-width: 284px;
+  max-height: 266px; */
+  max-width: 234px;
+  max-height: 216px;
+}
+
+.space-between {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 70%;
+  justify-content: space-between;
 }
 
 .pokemon-stats {
@@ -117,4 +148,49 @@
   justify-content: space-evenly;
   font-family: 'gill_sansmedium';
   /* border: solid 1px black; */
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 325px;
+  height: 500px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+/* .flip-card-front {
+  color: black;
+} */
+
+/* Style the back side */
+.flip-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 10px;
 }

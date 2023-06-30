@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from "./App.css"
-import font from './font.css'
+import styles from "./App.css";
+import font from './font.css';
+import backcard from './assets/backcard.png';
 
 // function ProductCategoryRow({ category }) {
 //   return (
@@ -192,11 +193,22 @@ function PokemonStats({ pokemon }) {
 
 function PokemonCard({ pokemon, colortypes }) {
   return (
-    <div className='pokemon-card'>
-      <TopCard pokemon={pokemon} />
-      <PokemonType pokemon={pokemon} colortypes={colortypes}/>
-      <Picture pokemon={pokemon}/>
-      <PokemonStats pokemon={pokemon} />
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div className='pokemon-card'>
+            <TopCard pokemon={pokemon} />
+            <PokemonType pokemon={pokemon} colortypes={colortypes}/>
+            <div className='space-between'>
+              <Picture pokemon={pokemon}/>
+              <PokemonStats pokemon={pokemon} />
+            </div>
+          </div>
+        </div>
+        <div class='flip-card-back'>
+          <img class='backcard' alt='pokemon back card' src={backcard}/>
+        </div>
+      </div>
     </div>
   )
 }
