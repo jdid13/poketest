@@ -46,7 +46,7 @@
 }
 
 .backcard {
-  width: 320px;
+  width: 280px;
   height: 434.44px;
   margin: 0px;
   border-radius: 5% / 3.5%;
@@ -61,9 +61,8 @@
 .pokemon-card {
   flex-flow: column nowrap;
   justify-items: center;
-  width: auto;
+  width: 280px;
   height: 414.44px;
-  margin: 0px;
   border: solid 10px rgb(235, 205, 100, 1);
   border-radius: 5% / 3.5%;
   background-color: white;
@@ -162,7 +161,7 @@
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
-  width: 320px;
+  width: 280px;
   height: 500px;
   margin: 10px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
@@ -185,16 +184,13 @@
 /* Position the front and back side */
 .flip-card-front, .flip-card-back{
   position: absolute;
-  width: 320px;
+  width: 280px;
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
 
 /* Style the front side (fallback if image is missing) */
-.flip-card-front {
-
-}
 
 /* Style the back side */
 .flip-card-back {
