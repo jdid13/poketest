@@ -133,9 +133,9 @@ function PokemonType({ pokemon, colortypes, setBgColor }) {
   }
   
   // We store the result in an empty list
-  colors = getColor(types, colortypes, 0)
-  setBgColor = colors[0];
-
+  colors = getColor(types, colortypes, 0);
+  console.log(colors[0]);
+  setBgColor(colors[0].substring(0, colors[0].length - 1) + ', 0.5')
   // Here we change the background if there's only one type
   if (types.length === 1) {
     return (
@@ -146,8 +146,7 @@ function PokemonType({ pokemon, colortypes, setBgColor }) {
   } else if (types.length === 2) {
     
     // Otherwise we reuse the function to push the other type to the 'colors' list
-    colors.push(getColor(types, colortypes, 1))
-    console.log(colors);
+    colors.push(getColor(types, colortypes, 1)) 
 
     return ( 
       <div className='pokemon-type-container'>
@@ -192,23 +191,24 @@ function PokemonStats({ pokemon }) {
 
 // This function creates a single card using all the components necessary to assemble them
 
-function PokemonCard({ pokemon, colortypes, setBgColor }) {
+function PokemonCard({ pokemon, colortypes }) {
+const [bgColor, setBgColor] = useState('');
 
   return (
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <div className='pokemon-card'>
+    <div className="flip-card">
+      <div className="flip-card-inner">
+        <div className="flip-card-back">
+          <div className='pokemon-card' style={{backgroundColor: bgColor} }>
             <TopCard pokemon={pokemon} />
             <PokemonType pokemon={pokemon} colortypes={colortypes} setBgColor={setBgColor} />
             <div className='space-between'>
               <Picture pokemon={pokemon}/>
-              <PokemonStats pokemon={pokemon} />
+              <PokemonStats pokemon={pokemon}/>
             </div>
           </div>
         </div>
-        <div class='flip-card-back'>
-          <img class='backcard' alt='pokemon back card' src={backcard}/>
+        <div className='flip-card-front'>
+          <img className='backcard' alt='pokemon back card' src={backcard}/>
         </div>
       </div>
     </div>
@@ -218,13 +218,12 @@ function PokemonCard({ pokemon, colortypes, setBgColor }) {
 // This function generate cards using the PokemonCard function using the POKEMONS list
 
 function PokemonsGenerator({ pokemons, colortypes }) {
-  const [bgColor, setBgColor] = useState();
   
   // We use an empty list to map each element of the original through the PokemonCard function
   const pokemonsList = pokemons.map((pokemon) => (
-    <PokemonCard key={pokemon.id} pokemon={pokemon} colortypes={colortypes} setBgColor={setBgColor}/>
+    <PokemonCard key={pokemon.id} pokemon={pokemon} colortypes={colortypes} />
   ));
-
+  
   
 
   return <div className='pokemon-generator'>{pokemonsList}</div>;
